@@ -89,7 +89,7 @@ Plug 'dag/vim2hs'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 
 " html / css
-Plug 'amirh/HTML-AutoCloseTag' " Autoclose HTML tags
+Plug 'vim-scripts/HTML-AutoCloseTag' " Autoclose HTML tags
 Plug 'mattn/emmet-vim' " HTML goodies
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque' " colorpreview #aaa
