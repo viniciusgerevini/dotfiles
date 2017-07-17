@@ -1,0 +1,24 @@
+Config {
+  bgColor = "#000000",
+  fgColor = "#ffffff",
+  lowerOnStart = False,
+  hideOnStart = False,
+  persistent = True,
+  commands = [
+    Run Battery [
+     "-t", "<acstatus>: <left>% - <timeleft>",
+     "--",
+      --"-c", "charge_full",
+     "-O", "AC",
+     "-o", "Bat",
+     "-h", "green",
+     "-l", "red"
+    ] 10,
+    Run Date "%a %b %_d %Y | %H:%M:%S" "date" 10,
+    Run Com "sh" ["-c","~/.xmonad/wifi_status.sh"] "wifi" 10,
+    Run StdinReader
+  ],
+  sepChar = "%",
+  alignSep = "}{",
+  template = " %StdinReader% }{ wlan: %wifi% | %battery% | %date% "
+}
