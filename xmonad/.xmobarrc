@@ -8,9 +8,9 @@ Config {
     Run Battery [
      "-t", "<acstatus>: <left>% - <timeleft>",
      "--",
-      --"-c", "charge_full",
-     "-O", "AC",
+     "-O", "Bat (charging)",
      "-o", "Bat",
+     "-i", "Bat (charged)",
      "-h", "green",
      "-l", "red"
     ] 10,
