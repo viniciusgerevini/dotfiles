@@ -1,7 +1,7 @@
 import System.Exit
 import XMonad
 
-import XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts, manageDocks)
+import XMonad.Hooks.ManageDocks (ToggleStruts(..), avoidStruts, manageDocks, docksEventHook)
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.DynamicLog
 
@@ -23,6 +23,7 @@ main = do
     xmonad $ defaultConfig
         { layoutHook = avoidStruts $ myLayouts
         , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
+        , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
         , logHook = dynamicLogWithPP $ sjanssenPP { ppOutput = hPutStrLn xmproc }
         }
       `additionalKeysP` -- Add some extra key bindings:
