@@ -1,9 +1,10 @@
 Config {
+  font = "-misc-fixed-*-*-*-*-12-*-*-*-*-*-*-*"
   bgColor = "#000000",
   fgColor = "#ffffff",
+  position = TopW L 95,
   lowerOnStart = False,
   hideOnStart = False,
-  persistent = True,
   commands = [
     Run Battery [
      "-t", "<acstatus>: <left>% - <timeleft>",
@@ -20,5 +21,5 @@ Config {
   ],
   sepChar = "%",
   alignSep = "}{",
-  template = " %StdinReader% }{ wlan: %wifi% | %battery% | %date% "
+  template = " %StdinReader% }{ wlan: %wifi% | %battery% | %date% | "
 }

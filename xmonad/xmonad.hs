@@ -16,6 +16,7 @@ import XMonad.Prompt.Shell
 
 import XMonad.Util.Run(spawnPipe)
 import XMonad.Util.EZConfig
+import XMonad.Util.SpawnOnce
 import System.IO
 
 main = do
@@ -25,12 +26,17 @@ main = do
         , manageHook = manageDocks <+> myManageHook <+> manageHook defaultConfig
         , handleEventHook = handleEventHook defaultConfig <+> docksEventHook
         , logHook = dynamicLogWithPP $ sjanssenPP { ppOutput = hPutStrLn xmproc }
+        , startupHook = myStartupHook
         }
       `additionalKeysP` -- Add some extra key bindings:
       [ ("M-S-q",   confirmPrompt myXPConfig "exit" (io exitSuccess))
       , ("M-<Esc>", sendMessage (Toggle "Full"))
       ]
 
+myStartupHook = do
+  spawnOnce "stalonetray"
+  spawnOnce "nm-applet"
+  spawnOnce "indicator-cpufreq"
 --------------------------------------------------------------------------------
 -- | Customize layouts.
 --
@@ -59,9 +65,7 @@ myXPConfig = def
 --
 -- Use the `xprop' tool to get the info you need for these matches.
 -- For className, use the second value that xprop gives you.
-myManageHook = composeOne
-  [ isDialog              -?> doCenterFloat
-
-    -- Move transient windows to their parent:
-  , transience
+myManageHook = composeAll
+  [
+    className =? "stalonetray" --> doIgnore
   ]
