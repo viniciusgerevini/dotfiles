@@ -83,3 +83,5 @@ load_source_file ~/.nvm/nvm.sh
 # ALIASES
 alias zshconfig="vim ~/.zshrc"
 alias rm-orig="rm -r **/*.orig"
+
+eval "$(thefuck --alias)"
