@@ -56,6 +56,11 @@ plugins=(
   docker
 )
 
+# fixing TMUX bracketed paste issue
+if [ ${TMUX} ]; then
+   unset zle_bracketed_paste
+fi
+
 # User configuration
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
