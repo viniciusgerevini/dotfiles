@@ -98,6 +98,7 @@ Plug 'othree/html5.vim'
 " JavaScript
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'rstacruz/vim-closer' " closes brackets automatical
+Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
 " Node
 Plug 'rstacruz/vim-node-import' " Node require shortcuts
