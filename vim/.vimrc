@@ -160,6 +160,7 @@ let g:session_command_aliases = 1
 syntax on
 set ruler
 set number
+set conceallevel=1
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
