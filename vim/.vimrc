@@ -40,11 +40,12 @@ Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
+Plug 'sickill/vim-pasta' " Pasting with indentation context
 
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-
+Plug 'ervandew/supertab' " auto insertion with Tab
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
@@ -90,18 +91,14 @@ Plug 'pbrisbin/vim-syntax-shakespeare'
 
 " html / css
 Plug 'vim-scripts/HTML-AutoCloseTag' " Autoclose HTML tags
-Plug 'mattn/emmet-vim' " HTML goodies
 Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque' " colorpreview #aaa
 Plug 'tpope/vim-haml'
+Plug 'othree/html5.vim'
 
 " JavaScript
-Plug 'jelera/vim-javascript-syntax' " Syntax highlighting
-Plug 'rstacruz/vim-closer' " closes brackets automatical
-
-" Node
-Plug 'rstacruz/vim-node-import' " Node require shortcuts
-
+Plug 'pangloss/vim-javascript' " JavaScript Syntax
+Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
 call plug#end()
 
@@ -160,6 +157,7 @@ let g:session_command_aliases = 1
 syntax on
 set ruler
 set number
+set conceallevel=1
 
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
@@ -251,7 +249,7 @@ let g:NERDTreeShowBookmarks=1
 let g:nerdtree_tabs_focus_on_files=1
 let g:NERDTreeMapOpenInTabSilent = '<RightMouse>'
 let g:NERDTreeWinSize = 50
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*/coverage
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
 
@@ -458,12 +456,6 @@ autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
 " javascript
 let g:javascript_enable_domhtmlcss = 1
-
-" vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
-augroup END
 
 "*****************************************************************************
 "" Convenience variables
