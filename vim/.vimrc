@@ -40,6 +40,7 @@ Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
+Plug 'sickill/vim-pasta' " Pasting with indentation context
 
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
