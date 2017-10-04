@@ -100,10 +100,6 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
-" Node
-Plug 'rstacruz/vim-node-import' " Node require shortcuts
-
-
 call plug#end()
 
 " Required:
