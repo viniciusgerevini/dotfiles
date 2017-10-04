@@ -96,7 +96,7 @@ Plug 'tpope/vim-haml'
 Plug 'othree/html5.vim'
 
 " JavaScript
-Plug 'jelera/vim-javascript-syntax' " Syntax highlighting
+Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'rstacruz/vim-closer' " closes brackets automatical
 
 " Node
@@ -458,12 +458,6 @@ autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
 " javascript
 let g:javascript_enable_domhtmlcss = 1
-
-" vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4 smartindent
-augroup END
 
 "*****************************************************************************
 "" Convenience variables
