@@ -45,7 +45,7 @@ Plug 'sickill/vim-pasta' " Pasting with indentation context
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-
+Plug 'ervandew/supertab' " auto insertion with Tab
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
