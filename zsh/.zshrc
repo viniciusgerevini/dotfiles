@@ -50,6 +50,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  osx
   git
   zsh-autosuggestions
   frontend-search
@@ -78,6 +79,7 @@ source $ZSH/oh-my-zsh.sh
 
 load_source_file ~/.private/scripts.sh
 load_source_file ~/.nvm/nvm.sh
+load_source_file ~/.scripts/docker_rm.sh
 
 
 # ALIASES
