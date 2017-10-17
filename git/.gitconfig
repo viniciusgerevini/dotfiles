@@ -3,7 +3,7 @@
   email = viniciusgerevini@gmail.com
 
 [merge]
-  tool = diffmerge
+  tool = vimdiff
 
 [core]
   editor = vim
