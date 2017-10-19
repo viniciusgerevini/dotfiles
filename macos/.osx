@@ -170,14 +170,6 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 # Show all processes in Activity Monitor
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 
-# Sets columns for all tabs
-# defaults read com.apple.ActivityMonitor "UserColumnsPerTab v5.0" -dict \
-#     '0' '( Command, CPUUsage, CPUTime, Threads, PID, UID, Ports )' \
-#     '1' '( Command, ResidentSize, Threads, Ports, PID, UID,  )' \
-#     '2' '( Command, PowerScore, 12HRPower, AppSleep, UID, powerAssertion )' \
-#     '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
-#     '4' '( Command, txBytes, rxBytes, PID, UID, txPackets, rxPackets, CPUUsage )'
-
 # Set sort column
 defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
     '0' '{ direction = 0; sort = CPUUsage; }' \
