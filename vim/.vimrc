@@ -160,13 +160,6 @@ set number
 set relativenumber
 set conceallevel=1
 
-" toggle relative line numbers on focus and insert
-:augroup numbertoggle
-:  autocmd!
-:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-:augroup END
-
 let no_buffers_menu=1
 if !exists('g:not_finish_vimplug')
   colorscheme Tomorrow-Night
