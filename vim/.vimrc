@@ -53,20 +53,9 @@ else
   Plug 'scrooloose/syntastic' " Syntax checking for various languages
 endif
 
-let g:make = 'gmake'
-if exists('make')
-        let g:make = 'make'
-endif
-
-Plug 'Shougo/vimproc.vim', {'do': g:make} " Interactive command execution in Vim
-
 "" Vim-Session
 Plug 'xolox/vim-misc' " autoload vim scripts used by some plugins
 Plug 'xolox/vim-session' " extended session management
-
-if v:version >= 703
-  Plug 'Shougo/vimshell.vim' " Shell on vim
-endif
 
 if v:version >= 704
   "" Snippets
@@ -125,7 +114,7 @@ set softtabstop=2
 set shiftwidth=2
 set expandtab
 
-"" Map leader to ,
+"" Map leader to [space]
 let mapleader=' '
 
 "" Enable hidden buffers
@@ -260,13 +249,6 @@ let Grep_Default_Options = '-IR'
 let Grep_Skip_Files = '*.log *.db'
 let Grep_Skip_Dirs = '.git node_modules'
 
-" vimshell.vim
-let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
-let g:vimshell_prompt =  '$ '
-
-" terminal emulation
-nnoremap <silent> <leader>sh :VimShellCreate<CR>
-
 "*****************************************************************************
 "" Functions
 "*****************************************************************************
@@ -299,14 +281,8 @@ augroup vimrc-wrapping
   autocmd BufRead,BufNewFile *.txt call s:setupWrapping()
 augroup END
 
-"" make/cmake
-augroup vimrc-make-cmake
-  autocmd!
-  autocmd FileType make setlocal noexpandtab
-  autocmd BufNewFile,BufRead CMakeLists.txt setlocal filetype=cmake
-augroup END
-
-autocmd BufEnter * EnableStripWhitespaceOnSave " Remove spaces on save
+" Remove spaces on save
+autocmd BufEnter * EnableStripWhitespaceOnSave
 
 set autoread
 
