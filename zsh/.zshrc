@@ -87,3 +87,5 @@ alias zshconfig="vim ~/.zshrc"
 alias rm-orig="rm -r **/*.orig"
 
 eval "$(thefuck --alias)"
+
+export GPG_TTY=$(tty)
