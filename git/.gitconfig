@@ -1,6 +1,7 @@
 [user]
   name = Vinicius Gerevini
   email = viniciusgerevini@gmail.com
+  signingkey = CE5C8B08042EAA6E
 
 [merge]
   tool = vimdiff
@@ -43,3 +44,9 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
+[diff]
+	tool = diffmerge
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
