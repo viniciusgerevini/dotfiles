@@ -89,3 +89,7 @@ alias rm-orig="rm -r **/*.orig"
 eval "$(thefuck --alias)"
 
 export GPG_TTY=$(tty)
+
+# Base16
+BASE16_SHELL=$HOME/.config/base16-shell/
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

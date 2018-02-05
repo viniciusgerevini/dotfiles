@@ -49,6 +49,7 @@ Plug 'ervandew/supertab' " auto insertion with Tab
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
+
 else
   Plug 'scrooloose/syntastic' " Syntax checking for various languages
 endif
@@ -67,7 +68,8 @@ Plug 'honza/vim-snippets' " some more snippets
 
 "" Color
 Plug 'flazz/vim-colorschemes' " A bunch of colorschemes
-Plug 'rakr/vim-one' " One colorscheme
+Plug 'rakr/vim-one' " One colorscheme"
+Plug 'chriskempson/base16-vim' " Base16 colorscheme
 
 "*****************************************************************************
 "" Custom bundles
@@ -150,9 +152,13 @@ set relativenumber
 set conceallevel=1
 
 let no_buffers_menu=1
-if !exists('g:not_finish_vimplug')
-  colorscheme Tomorrow-Night
-  " colorscheme onedark
+" if !exists('g:not_finish_vimplug')
+  " colorscheme Tomorrow-Night
+" endif
+
+if filereadable(expand("~/.vimrc_background"))
+  let base16colorspace=256
+  source ~/.vimrc_background
 endif
 
 set mousemodel=popup
@@ -209,7 +215,7 @@ if exists("*fugitive#statusline")
 endif
 
 " vim-airline
-let g:airline_theme = 'one'
+" let g:airline_theme = 'one'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
