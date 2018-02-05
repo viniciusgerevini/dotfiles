@@ -214,6 +214,9 @@ if exists("*fugitive#statusline")
   set statusline+=%{fugitive#statusline()}
 endif
 
+" remove line number background
+highlight LineNr ctermbg=NONE
+
 " vim-airline
 " let g:airline_theme = 'one'
 let g:airline#extensions#syntastic#enabled = 1
