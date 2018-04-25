@@ -1,95 +1,102 @@
-# Path to your oh-my-zsh installation.
-export ZSH=~/.oh-my-zsh
+### ZPLUG
+if [ ! -d ~/.zplug ]
+then
+  echo "installing zplug"
+  curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+fi
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+source ~/.zplug/init.zsh
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+#### PLUGINS
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions"
+####
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+  printf "Install? [y/N]: "
+  if read -q; then
+    echo; zplug install
+  fi
+fi
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Then, source plugins and add commands to $PATH
+zplug load
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
 
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
+#### BASE 16
+BASE16_SHELL=$HOME/.config/base16-shell/
 
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+if [ ! -d $BASE16_SHELL ]
+then
+  git clone https://github.com/chriskempson/base16-shell.git $BASE16_SHELL
+fi
 
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
+[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+### ZSH OPTIONS
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
+# history
+HISTSIZE=2000
+HISTFILE="$HOME/.history"
+setopt share_history
 
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+# tab autocompletion
+autoload -U compinit
+compinit
 
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
+zstyle ':completion:*' menu select
+zstyle ':completion:*' completer _complete
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' '+l:|=* r:|=*'
 
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(
-  osx
-  git
-  zsh-autosuggestions
-  frontend-search
-  docker
-)
+# prompt
+autoload -U promptinit
+promptinit
+setopt prompt_subst
+
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git
+zstyle ':vcs_info:git*' formats "%{$fg[cyan]%}(%b%c%u%{$fg[cyan]%})%F{reset}"
+zstyle ':vcs_info:git*' actionformats "%{$fg[cyan]%}(%b%{$fg[red]%}%a{$fg[cyan]%})%F{reset}"
+
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' stagedstr "%{$fg[green]%}*%F{reset}"
+zstyle ':vcs_info:*' unstagedstr "%{$fg[red]%}*%F{reset}"
+
+
+precmd() {
+  vcs_info
+}
+
+prompt_status="%(?:%{$fg[blue]%}❯:%{$fg[red]%}❯)%F{reset}"
+prompt_user_mark="%(!.#)"
+
+PS1='$prompt_status %1~ ${vcs_info_msg_0_} $prompt_user_mark '
+
+### FIXES
+
+# Required for GPG signature
+export GPG_TTY=$(tty)
 
 # fixing TMUX bracketed paste issue
 if [ ${TMUX} ]; then
-   unset zle_bracketed_paste
+  unset zle_bracketed_paste
 fi
 
-# User configuration
+### USER CONFIGURATION
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH="$HOME/.node/bin:$PATH"
-export PATH="$HOME/Library/Haskell/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 
-function load_source_file() {
+function load_file_if_exists() {
   if [ -e "$1" ]
   then
     source "$1"
   fi
 }
 
-source $ZSH/oh-my-zsh.sh
+load_file_if_exists ~/.private/scripts.sh
+load_file_if_exists ~/.nvm/nvm.h
 
-load_source_file ~/.private/scripts.sh
-load_source_file ~/.nvm/nvm.sh
-load_source_file ~/.scripts/docker_rm.sh
-
-
-# ALIASES
-alias zshconfig="vim ~/.zshrc"
-alias rm-orig="rm -r **/*.orig"
-
-eval "$(thefuck --alias)"
-
-export GPG_TTY=$(tty)
-
-# Base16
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
