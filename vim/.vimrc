@@ -8,8 +8,7 @@ endif
 let vimplug_exists=expand('~/.vim/autoload/plug.vim')
 
 if !filereadable(vimplug_exists)
-  echo "Installing Vim-Plug..."
-  echo ""
+  echo "Installing Vim-Plug...\n"
   silent !\curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let g:not_finish_vimplug = "yes"
 
@@ -27,7 +26,6 @@ Plug 'jistr/vim-nerdtree-tabs' " Tabs integration for Nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
 Plug 'tpope/vim-commentary' " Allow comment/uncomment lines
 Plug 'tpope/vim-fugitive' " Git integration
-Plug 'tpope/vim-rhubarb' " Github integration plugin for Fugitive
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, ... finder for Vim
 Plug 'vim-airline/vim-airline' " Lean & mean status/tabline
 Plug 'vim-airline/vim-airline-themes' " Airline themes
@@ -36,12 +34,10 @@ Plug 'vim-scripts/grep.vim' " Grep command integration
 Plug 'vim-scripts/CSApprox' " Make GVim colorschemes work with Vim
 Plug 'ntpeters/vim-better-whitespace' " Remove trailing spaces
 Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
-Plug 'majutsushi/tagbar'
 Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'sickill/vim-pasta' " Pasting with indentation context
-
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
@@ -49,7 +45,6 @@ Plug 'ervandew/supertab' " auto insertion with Tab
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
-
 else
   Plug 'scrooloose/syntastic' " Syntax checking for various languages
 endif
@@ -67,8 +62,6 @@ endif
 Plug 'honza/vim-snippets' " some more snippets
 
 "" Color
-Plug 'flazz/vim-colorschemes' " A bunch of colorschemes
-Plug 'rakr/vim-one' " One colorscheme"
 Plug 'chriskempson/base16-vim' " Base16 colorscheme
 
 "*****************************************************************************
@@ -90,6 +83,9 @@ Plug 'othree/html5.vim'
 " JavaScript
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
+
+" GDScript (Godot Engine)
+Plug 'quabug/vim-gdscript' " GDScript syntax
 
 call plug#end()
 
@@ -136,6 +132,9 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/sh
 
+" enable mouse support
+set mouse=a
+
 " session management
 let g:session_directory = "~/./session"
 let g:session_autoload = "no"
@@ -152,9 +151,6 @@ set relativenumber
 set conceallevel=1
 
 let no_buffers_menu=1
-" if !exists('g:not_finish_vimplug')
-  " colorscheme Tomorrow-Night
-" endif
 
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
@@ -166,28 +162,20 @@ set t_Co=256
 set guioptions=egmrti
 set gfn=Monospace\ 10
 
-if has("gui_running")
-  if has("gui_mac") || has("gui_macvim")
-    set guifont=Menlo:h12
-    set transparency=7
-  endif
+let g:CSApprox_loaded = 1
+
+" IndentLine
+let g:indentLine_enabled = 1
+let g:indentLine_concealcursor = 0
+let g:indentLine_char = '┆'
+let g:indentLine_faster = 1
+
+if $COLORTERM == 'gnome-terminal'
+  set term=gnome-256color
 else
-  let g:CSApprox_loaded = 1
-
-  " IndentLine
-  let g:indentLine_enabled = 1
-  let g:indentLine_concealcursor = 0
-  let g:indentLine_char = '┆'
-  let g:indentLine_faster = 1
-
-  if $COLORTERM == 'gnome-terminal'
-    set term=gnome-256color
-  else
-    if $TERM == 'xterm'
-      set term=xterm-256color
-    endif
+  if $TERM == 'xterm'
+    set term=xterm-256color
   endif
-
 endif
 
 if &term =~ '256color'
@@ -218,7 +206,6 @@ endif
 highlight LineNr ctermbg=NONE
 
 " vim-airline
-" let g:airline_theme = 'one'
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -335,6 +322,10 @@ noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
 "" Opens a tab edit command with the path of the currently edited file filled
 noremap <Leader>te :tabe <C-R>=expand("%:p:h") . "/" <CR>
 
+" F11 to toggle paste mode
+map <F11> :set invpaste<CR>
+set pastetoggle=<F11>
+
 "" ctrlp.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
@@ -421,9 +412,6 @@ vmap > >gv
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
-"" Open current line on GitHub
-nnoremap <Leader>o :.Gbrowse<CR>
-
 "*****************************************************************************
 "" Custom configs
 "*****************************************************************************
@@ -452,34 +440,20 @@ if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
 
-if !exists('g:airline_powerline_fonts')
-  let g:airline#extensions#tabline#left_sep = ' '
-  let g:airline#extensions#tabline#left_alt_sep = '|'
-  let g:airline_left_sep          = '▶'
-  let g:airline_left_alt_sep      = '»'
-  let g:airline_right_sep         = '◀'
-  let g:airline_right_alt_sep     = '«'
-  let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
-  let g:airline#extensions#readonly#symbol   = '⊘'
-  let g:airline#extensions#linecolumn#prefix = '¶'
-  let g:airline#extensions#paste#symbol      = 'ρ'
-  let g:airline_symbols.linenr    = '␊'
-  let g:airline_symbols.branch    = '⎇'
-  let g:airline_symbols.paste     = 'ρ'
-  let g:airline_symbols.paste     = 'Þ'
-  let g:airline_symbols.paste     = '∥'
-  let g:airline_symbols.whitespace = 'Ξ'
-else
-  let g:airline#extensions#tabline#left_sep = ''
-  let g:airline#extensions#tabline#left_alt_sep = ''
-
-  " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-endif
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline_left_sep          = '▶'
+let g:airline_left_alt_sep      = '»'
+let g:airline_right_sep         = '◀'
+let g:airline_right_alt_sep     = '«'
+let g:airline#extensions#branch#prefix     = '⤴' "➔, ➥, ⎇
+let g:airline#extensions#readonly#symbol   = '⊘'
+let g:airline#extensions#linecolumn#prefix = '¶'
+let g:airline#extensions#paste#symbol      = 'ρ'
+let g:airline_symbols.linenr    = '␊'
+let g:airline_symbols.branch    = '⎇'
+let g:airline_symbols.paste     = 'ρ'
+let g:airline_symbols.paste     = 'Þ'
+let g:airline_symbols.paste     = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
 
