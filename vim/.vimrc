@@ -132,6 +132,9 @@ set fileformats=unix,dos,mac
 set showcmd
 set shell=/bin/sh
 
+" enable mouse support
+set mouse=a
+
 " session management
 let g:session_directory = "~/./session"
 let g:session_autoload = "no"
