@@ -84,6 +84,9 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
+" GDScript (Godot Engine)
+Plug 'quabug/vim-gdscript' " GDScript syntax
+
 call plug#end()
 
 " Required:
