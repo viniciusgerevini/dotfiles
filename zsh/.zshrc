@@ -39,8 +39,23 @@ fi
 ### ZSH OPTIONS
 
 # history
-HISTSIZE=2000
+HISTSIZE=50000
+SAVEHIST=10000
 HISTFILE="$HOME/.history"
+
+# record timestamp of command in HISTFILE
+setopt extended_history
+# delete duplicates first when HISTFILE size exceeds HISTSIZE
+setopt hist_expire_dups_first
+# ignore duplicated commands history list
+setopt hist_ignore_dups
+# ignore commands that start with space
+setopt hist_ignore_space
+# show command with history expansion to user before running it
+setopt hist_verify
+# add commands to HISTFILE in order of execution
+setopt inc_append_history
+# share command history data
 setopt share_history
 
 # tab autocompletion
