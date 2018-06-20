@@ -22,7 +22,6 @@ call plug#begin(expand('~/.vim/plugged'))
 "" Plug install packages
 "*****************************************************************************
 Plug 'scrooloose/nerdtree' " File tree
-Plug 'jistr/vim-nerdtree-tabs' " Tabs integration for Nerdtree
 Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
 Plug 'tpope/vim-commentary' " Allow comment/uncomment lines
 Plug 'tpope/vim-fugitive' " Git integration
@@ -309,11 +308,6 @@ nnoremap <leader>so :OpenSession<Space>
 nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
-
-"" Tabs
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-nnoremap <silent> <S-t> :tabnew<CR>
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
