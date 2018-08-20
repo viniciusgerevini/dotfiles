@@ -362,6 +362,9 @@ let g:syntastic_aggregate_errors = 1
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
+" Supertab
+let g:SuperTabDefaultCompletionType = "context"
+
 " Disable visualbell
 set noerrorbells visualbell t_vb=
 if has('autocmd')
