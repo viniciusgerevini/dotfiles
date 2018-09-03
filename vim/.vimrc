@@ -40,8 +40,8 @@ Plug 'sickill/vim-pasta' " Pasting with indentation context
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'ervandew/supertab' " auto insertion with Tab
 Plug 'racer-rust/vim-racer' " rust autocompletion
+Plug 'lifepillar/vim-mucomplete' " Completion wrapper
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
@@ -362,8 +362,10 @@ let g:syntastic_aggregate_errors = 1
 nmap <silent> <F4> :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 
-" Supertab
-let g:SuperTabDefaultCompletionType = "context"
+" autocompletion
+set completeopt+=menuone
+set completeopt+=noinsert
+let g:mucomplete#enable_auto_at_startup = 1
 
 " Disable visualbell
 set noerrorbells visualbell t_vb=
