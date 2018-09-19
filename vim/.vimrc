@@ -324,6 +324,12 @@ let g:syntastic_aggregate_errors = 1
 " Ale
 let g:ale_sign_error = '✖'
 let g:ale_sign_warning = '⚠'
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'javascript': ['eslint'],
+\}
+let g:ale_completion_enabled = 1
+
 
 " vim-airline
 let g:airline#extensions#syntastic#enabled = 1
