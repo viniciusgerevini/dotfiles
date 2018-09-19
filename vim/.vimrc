@@ -354,6 +354,10 @@ let g:syntastic_style_warning_symbol = '⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
 
+" Ale
+let g:ale_sign_error = '✖'
+let g:ale_sign_warning = '⚠'
+
 " autocompletion
 set completeopt+=preview
 set completeopt+=menuone
