@@ -355,8 +355,10 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_aggregate_errors = 1
 
 " autocompletion
+set completeopt+=preview
 set completeopt+=menuone
 set completeopt+=noinsert
+set shortmess+=c " turn off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
 
 " Disable visualbell
