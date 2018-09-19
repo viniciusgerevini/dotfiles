@@ -40,7 +40,6 @@ Plug 'sickill/vim-pasta' " Pasting with indentation context
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'racer-rust/vim-racer' " rust autocompletion
 Plug 'lifepillar/vim-mucomplete' " Completion wrapper
 
 if v:version >= 800
@@ -64,10 +63,6 @@ Plug 'honza/vim-snippets' " some more snippets
 "" Color
 Plug 'chriskempson/base16-vim' " Base16 colorscheme
 
-"*****************************************************************************
-"" Custom bundles
-"*****************************************************************************
-
 " Haskell
 Plug 'eagletmt/neco-ghc'
 Plug 'dag/vim2hs'
@@ -86,6 +81,9 @@ Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
 " GDScript (Godot Engine)
 Plug 'quabug/vim-gdscript' " GDScript syntax
+
+" Rust
+Plug 'racer-rust/vim-racer' " rust autocompletion
 
 call plug#end()
 
