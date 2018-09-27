@@ -330,6 +330,9 @@ let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \}
 let g:ale_completion_enabled = 1
+let g:ale_linters = {
+\   'rust': ['rls', 'cargo']
+\}
 
 noremap <Leader>ad :ALEGoToDefinition<CR>
 noremap <Leader>af :ALEFix<CR>
