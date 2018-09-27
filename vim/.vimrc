@@ -330,6 +330,9 @@ let g:ale_fixers = {
 \}
 let g:ale_completion_enabled = 1
 
+noremap <Leader>ad :ALEGoToDefinition<CR>
+noremap <Leader>af :ALEFix<CR>
+noremap <Leader>ar :ALEFindReferences<CR>
 
 " vim-airline
 let g:airline#extensions#syntastic#enabled = 1
