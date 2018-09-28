@@ -115,3 +115,4 @@ function load_file_if_exists() {
 load_file_if_exists ~/.private/scripts.sh
 load_file_if_exists ~/.nvm/nvm.sh
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
