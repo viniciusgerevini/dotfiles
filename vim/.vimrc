@@ -82,9 +82,6 @@ Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 " GDScript (Godot Engine)
 Plug 'quabug/vim-gdscript' " GDScript syntax
 
-" Rust
-Plug 'racer-rust/vim-racer' " rust autocompletion
-
 call plug#end()
 
 " Required:
@@ -329,10 +326,10 @@ let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
 \   'javascript': ['eslint'],
 \}
-let g:ale_completion_enabled = 1
 let g:ale_linters = {
 \   'rust': ['rls', 'cargo']
 \}
+let g:ale_completion_enabled = 1
 
 noremap <Leader>ad :ALEGoToDefinition<CR>
 noremap <Leader>af :ALEFix<CR>
