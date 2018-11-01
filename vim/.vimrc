@@ -41,6 +41,7 @@ Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'lifepillar/vim-mucomplete' " Completion wrapper
+Plug 'benmills/vimux' " TMUX integration
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
@@ -245,8 +246,8 @@ set autoread
 "" Mappings
 "*****************************************************************************
 "" Split
-noremap <Leader>h :<C-u>split<CR>
-noremap <Leader>v :<C-u>vsplit<CR>
+noremap <Leader>sh :<C-u>split<CR>
+noremap <Leader>sv :<C-u>vsplit<CR>
 
 "" Search
 vnoremap // y/<C-R>"<CR>"
@@ -267,6 +268,24 @@ nnoremap <leader>so :OpenSession<Space>
 nnoremap <leader>ss :SaveSession<Space>
 nnoremap <leader>sd :DeleteSession<CR>
 nnoremap <leader>sc :CloseSession<CR>
+
+" Run command in TMUX pane
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run last command executed by VimuxRunCommand
+map <Leader>vl :VimuxRunLastCommand<CR>
+" Inspect runner pane
+map <Leader>vi :VimuxInspectRunner<CR>
+" Zoom the tmux runner pane
+map <Leader>vz :VimuxZoomRunner<CR>
+" close pane
+map <Leader>vc :VimuxCloseRunner<CR>
+" stop execution in pane
+map <Leader>vs :VimuxInterruptRunner<CR>
+" Open Vimux prompt with current buffer name
+map <Leader>vr :VimuxPromptCommand bufname("%")<CR>
+
+" create pane for vimux instead of using open ones
+let g:VimuxUseNearest=0
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
