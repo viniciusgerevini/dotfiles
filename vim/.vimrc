@@ -63,11 +63,6 @@ Plug 'honza/vim-snippets' " some more snippets
 "" Color
 Plug 'chriskempson/base16-vim' " Base16 colorscheme
 
-" Haskell
-Plug 'eagletmt/neco-ghc'
-Plug 'dag/vim2hs'
-Plug 'pbrisbin/vim-syntax-shakespeare'
-
 " html / css
 Plug 'vim-scripts/HTML-AutoCloseTag' " Autoclose HTML tags
 Plug 'hail2u/vim-css3-syntax'
@@ -446,13 +441,6 @@ vnoremap K :m '<-2<CR>gv=gv
 "*****************************************************************************
 "" Language configs
 "*****************************************************************************
-
-" haskell
-let g:haskell_conceal_wide = 1
-let g:haskell_multiline_strings = 1
-let g:necoghc_enable_detailed_browse = 1
-autocmd Filetype haskell setlocal omnifunc=necoghc#omnifunc
-
 
 " html
 " for html files, 2 spaces
