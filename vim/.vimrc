@@ -37,6 +37,7 @@ Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'sickill/vim-pasta' " Pasting with indentation context
+Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid indentation issues
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
@@ -292,10 +293,6 @@ nnoremap <leader>. :lcd %:p:h<CR>
 
 "" Opens an edit command with the path of the currently edited file filled in
 noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
-" F11 to toggle paste mode
-map <F11> :set invpaste<CR>
-set pastetoggle=<F11>
 
 "" ctrlp.vim
 set wildmode=list:longest,list:full
