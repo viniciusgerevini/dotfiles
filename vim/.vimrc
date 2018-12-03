@@ -127,6 +127,10 @@ set shell=/bin/sh
 " enable mouse support
 set mouse=a
 
+" splits
+set splitbelow
+set splitright
+
 " session management
 let g:session_directory = "~/./session"
 let g:session_autoload = "no"
