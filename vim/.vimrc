@@ -251,8 +251,8 @@ set autoread
 "" Mappings
 "*****************************************************************************
 "" Split
-noremap <Leader>sh :<C-u>split<CR>
-noremap <Leader>sv :<C-u>vsplit<CR>
+" go to next split
+noremap <Leader>sn <C-w><C-w><CR>
 
 "" Search
 vnoremap // y/<C-R>"<CR>"
