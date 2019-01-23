@@ -12,6 +12,7 @@ zplug "zsh-users/zsh-history-substring-search"
 zplug "zsh-users/zsh-syntax-highlighting"
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-completions"
+zplug "junegunn/fzf", use:"shell/*.zsh"
 ####
 
 # Install plugins if there are plugins that have not been installed
@@ -114,5 +115,3 @@ function load_file_if_exists() {
 
 load_file_if_exists ~/.private/scripts.sh
 load_file_if_exists ~/.nvm/nvm.sh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
