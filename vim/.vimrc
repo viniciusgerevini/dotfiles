@@ -32,6 +32,7 @@ Plug 'airblade/vim-gitgutter' " Git status indicator
 Plug 'vim-scripts/grep.vim' " Grep command integration
 Plug 'vim-scripts/CSApprox' " Make GVim colorschemes work with Vim
 Plug 'ntpeters/vim-better-whitespace' " Remove trailing spaces
+Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
 Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
@@ -457,11 +458,6 @@ vmap > >gv
 "" Move visual block
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
-
-" expand brackets (autocomplete on break)
-inoremap (<Enter> (<CR>)<C-c>O
-inoremap {<Enter> {<CR>}<C-c>O
-inoremap [<Enter> [<CR>]<C-c>O
 
 "*****************************************************************************
 "" Language configs
