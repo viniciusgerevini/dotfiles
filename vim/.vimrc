@@ -23,6 +23,7 @@ call plug#begin(expand('~/.vim/plugged'))
 "*****************************************************************************
 Plug 'scrooloose/nerdtree' " File tree
 Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enable colors for filetype
 Plug 'tpope/vim-commentary' " Allow comment/uncomment lines
 Plug 'tpope/vim-fugitive' " Git integration
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, ... finder for Vim
@@ -43,6 +44,7 @@ Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'lifepillar/vim-mucomplete' " Completion wrapper
 Plug 'benmills/vimux' " TMUX integration
+Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
