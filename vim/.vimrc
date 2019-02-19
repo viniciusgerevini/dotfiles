@@ -26,6 +26,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enable colors for filetype
 Plug 'tpope/vim-commentary' " Allow comment/uncomment lines
 Plug 'tpope/vim-fugitive' " Git integration
+Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, ... finder for Vim
 Plug 'vim-airline/vim-airline' " Lean & mean status/tabline
 Plug 'vim-airline/vim-airline-themes' " Airline themes
