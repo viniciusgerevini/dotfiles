@@ -279,6 +279,8 @@ nnoremap <leader>sc :CloseSession<CR>
 
 " Run command in TMUX pane
 map <Leader>vp :VimuxPromptCommand<CR>
+" Open Vimux prompt with current buffer name
+map <Leader>vr :VimuxPromptCommand bufname("%")<CR>
 " Run last command executed by VimuxRunCommand
 map <Leader>vl :VimuxRunLastCommand<CR>
 " Inspect runner pane
@@ -286,11 +288,9 @@ map <Leader>vi :VimuxInspectRunner<CR>
 " Zoom the tmux runner pane
 map <Leader>vz :VimuxZoomRunner<CR>
 " close pane
-map <Leader>vc :VimuxCloseRunner<CR>
-" stop execution in pane
-map <Leader>vs :VimuxInterruptRunner<CR>
-" Open Vimux prompt with current buffer name
-map <Leader>vr :VimuxPromptCommand bufname("%")<CR>
+map <Leader>vq :VimuxCloseRunner<CR>
+"stop execution in pane
+map <Leader>vx :VimuxInterruptRunner<CR>
 
 " create pane for vimux instead of using open ones
 let g:VimuxUseNearest=0
@@ -387,8 +387,8 @@ let g:indentLine_enabled = 1
 let g:indentLine_faster = 1
 
 let g:indentLine_char = '·'
-let g:indentLine_leadingSpaceEnabled = 1
-let g:indentLine_leadingSpaceChar = '·'
+" let g:indentLine_leadingSpaceEnabled = 1
+" let g:indentLine_leadingSpaceChar = '·'
 
 " autocompletion
 set completeopt+=preview
@@ -398,6 +398,9 @@ set shortmess+=c " turn off completion messages
 let g:mucomplete#enable_auto_at_startup = 1
 
 "" NERDTree configuration
+let g:NERDTreeMinimalUI = 1
+" let g:NERDTreeDirArrowExpandable = '▸'
+" let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeChDirMode=2
 let g:NERDTreeIgnore=['\.rbc$', '\~$', '\.pyc$', '\.db$', '\.sqlite$', '__pycache__']
 let g:NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$', '\.bak$', '\~$']
@@ -408,6 +411,10 @@ let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*/coverage
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
+
+" NERDTree devicons for folders
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+let g:DevIconsEnableFoldersOpenClose = 1
 
 " grep.vim
 nnoremap <silent> <leader>f :Rgrep<CR>
