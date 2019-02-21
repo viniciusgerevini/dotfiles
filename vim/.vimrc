@@ -44,7 +44,7 @@ Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'lifepillar/vim-mucomplete' " Completion wrapper
-Plug 'benmills/vimux' " TMUX integration
+Plug 'viniciusgerevini/vimux' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 
 if v:version >= 800
@@ -289,8 +289,10 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vz :VimuxZoomRunner<CR>
 " close pane
 map <Leader>vq :VimuxCloseRunner<CR>
-"stop execution in pane
+" stop execution in pane
 map <Leader>vx :VimuxInterruptRunner<CR>
+" set new pane as runner
+map <leader>vs :VimuxSetRunner(input('set new runner: '))<CR>
 
 " create pane for vimux instead of using open ones
 let g:VimuxUseNearest=0
