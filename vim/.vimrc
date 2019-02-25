@@ -303,9 +303,6 @@ let g:VimuxUseNearest=0
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
 
-"" Opens an edit command with the path of the currently edited file filled in
-noremap <Leader>e :e <C-R>=expand("%:p:h") . "/" <CR>
-
 "" ctrlp.vim
 set wildmode=list:longest,list:full
 set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
