@@ -224,6 +224,9 @@ if !exists('*s:setupWrapping')
   endfunction
 endif
 
+" insert current date in ISO8601/W3C format (http://www.w3.org/TR/NOTE-datetime)
+noremap <Leader>ct "=strftime('%FT%T%z')<C-M>p
+
 "*****************************************************************************
 "" Autocmd Rules
 "*****************************************************************************
