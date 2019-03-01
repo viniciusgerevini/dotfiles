@@ -35,7 +35,6 @@ Plug 'vim-scripts/grep.vim' " Grep command integration
 Plug 'vim-scripts/CSApprox' " Make GVim colorschemes work with Vim
 Plug 'ntpeters/vim-better-whitespace' " Remove trailing spaces
 Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
-Plug 'Yggdroot/indentLine' " Show indentation lines
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'sickill/vim-pasta' " Pasting with indentation context
@@ -384,14 +383,6 @@ let g:airline_symbols.paste     = 'Þ'
 let g:airline_symbols.paste     = '∥'
 let g:airline_symbols.whitespace = 'Ξ'
 
-" IndentLine
-let g:indentLine_enabled = 1
-let g:indentLine_faster = 1
-
-let g:indentLine_char = '·'
-" let g:indentLine_leadingSpaceEnabled = 1
-" let g:indentLine_leadingSpaceChar = '·'
-
 " autocompletion
 set completeopt+=preview
 set completeopt+=menuone
@@ -483,3 +474,12 @@ autocmd Filetype html setlocal ts=2 sw=2 expandtab
 " javascript
 let g:javascript_enable_domhtmlcss = 1
 
+" show leading spaces
+hi Conceal guibg=NONE ctermbg=NONE ctermfg=DarkGrey
+autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
+autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
+autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
+autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
+
+" show tabs and trailling spaces
+set list listchars=tab:→\ ,trail:·
