@@ -230,12 +230,6 @@ noremap <Leader>ct "=strftime('%FT%T%z')<C-M>p
 "*****************************************************************************
 "" Autocmd Rules
 "*****************************************************************************
-"" The PC is fast enough, do syntax highlight syncing from start
-augroup vimrc-sync-fromstart
-  autocmd!
-  autocmd BufEnter * :syntax sync fromstart
-augroup END
-
 "" Remember cursor position
 augroup vimrc-remember-cursor-position
   autocmd!
