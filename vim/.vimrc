@@ -258,15 +258,9 @@ noremap <Leader>sn <C-w><C-w><CR>
 vnoremap // y/<C-R>"<CR>"
 
 "" Git
-noremap <Leader>ga :Gwrite<CR>
-noremap <Leader>gc :Gcommit<CR>
-noremap <Leader>gps :Gpush<CR>
-noremap <Leader>gpl :Gpull<CR>
 noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gd :Gvdiff<CR>
 noremap <Leader>gl :Glog<CR>
-noremap <Leader>gr :Gremove<CR>
 
 " session management
 nnoremap <leader>so :OpenSession<Space>
