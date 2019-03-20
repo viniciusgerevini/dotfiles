@@ -340,9 +340,9 @@ let g:ale_linters = {
 \}
 let g:ale_completion_enabled = 1
 
-noremap <Leader>ad :ALEGoToDefinition<CR>
-noremap <Leader>af :ALEFix<CR>
-noremap <Leader>ar :ALEFindReferences<CR>
+noremap <Leader>gd :ALEGoToDefinition<CR>
+noremap <Leader>lf :ALEFix<CR>
+noremap <Leader>gr :ALEFindReferences<CR>
 
 " vim-airline
 let g:airline#extensions#syntastic#enabled = 1
