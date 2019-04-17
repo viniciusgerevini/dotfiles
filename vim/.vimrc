@@ -101,6 +101,9 @@ set ttyfast
 "" Fix backspace indent
 set backspace=indent,eol,start
 
+" faster scroll when syntax on
+set lazyredraw
+
 "" Tabs. May be overriten by autocmd rules
 set tabstop=2
 set softtabstop=2
@@ -339,6 +342,7 @@ let g:ale_linters = {
 \   'rust': ['rls', 'cargo']
 \}
 let g:ale_completion_enabled = 1
+let g:ale_lint_on_text_changed = 'never'
 
 noremap <Leader>gd :ALEGoToDefinition<CR>
 noremap <Leader>lf :ALEFix<CR>
