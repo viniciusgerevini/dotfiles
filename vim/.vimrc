@@ -53,10 +53,6 @@ else
   Plug 'scrooloose/syntastic' " Syntax checking for various languages
 endif
 
-"" Vim-Session
-Plug 'xolox/vim-misc' " autoload vim scripts used by some plugins
-Plug 'xolox/vim-session' " extended session management
-
 if v:version >= 704
   "" Snippets
   Plug 'SirVer/ultisnips' " lots of snippets
@@ -133,12 +129,6 @@ set mouse=a
 " splits
 set splitbelow
 set splitright
-
-" session management
-let g:session_directory = "~/./session"
-let g:session_autoload = "no"
-let g:session_autosave = "no"
-let g:session_command_aliases = 1
 
 "*****************************************************************************
 "" Visual Settings
@@ -261,12 +251,6 @@ vnoremap // y/<C-R>"<CR>"
 noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gl :Glog<CR>
-
-" session management
-nnoremap <leader>so :OpenSession<Space>
-nnoremap <leader>ss :SaveSession<Space>
-nnoremap <leader>sd :DeleteSession<CR>
-nnoremap <leader>sc :CloseSession<CR>
 
 " Run command in TMUX pane
 map <Leader>vp :VimuxPromptCommand<CR>
