@@ -43,9 +43,9 @@ Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid i
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'lifepillar/vim-mucomplete' " Completion wrapper
 Plug 'viniciusgerevini/vimux' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Coc intellisense engine
 
 if v:version >= 800
   Plug 'w0rp/ale' " Asyncronous linter
@@ -338,12 +338,42 @@ let g:ale_fixers = {
 let g:ale_linters = {
 \   'rust': ['rls', 'cargo']
 \}
-let g:ale_completion_enabled = 1
+
 let g:ale_lint_on_text_changed = 'never'
 
-noremap <Leader>gd :ALEGoToDefinition<CR>
 noremap <Leader>lf :ALEFix<CR>
-noremap <Leader>gr :ALEFindReferences<CR>
+
+" use coc for jumps
+nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gr <Plug>(coc-references)
+
+" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+
+" use <c-space> for trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" use <c-j> and <c-k> for selection options
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
+
+"use <tab> for trigger completion, completion confirm, snippet expand and jump
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 " vim-airline
 let g:airline#extensions#syntastic#enabled = 1
@@ -378,7 +408,6 @@ set completeopt+=preview
 set completeopt+=menuone
 set completeopt+=noinsert
 set shortmess+=c " turn off completion messages
-let g:mucomplete#enable_auto_at_startup = 1
 
 "" NERDTree configuration
 let g:NERDTreeMinimalUI = 1
