@@ -20,7 +20,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'scrooloose/nerdtree' " File tree
 Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enable colors for filetype
-Plug 'tpope/vim-commentary' " Allow comment/uncomment lines
+Plug 'tomtom/tcomment_vim' " comment/uncomment command with support to embbeded types
 Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'tommcdo/vim-fugitive-blame-ext' " add commit message to blame on vim-fugitive
