@@ -43,7 +43,7 @@ Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid i
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'viniciusgerevini/vimux' " TMUX integration
+Plug 'viniciusgerevini/vimtmux' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Coc intellisense engine
 
@@ -252,25 +252,31 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gl :Glog<CR>
 
-" Run command in TMUX pane
-map <Leader>vp :VimuxPromptCommand<CR>
+" VIMTMUX
+" Prompt and run command
+map <Leader>vp :VimTmuxPromptCommand<CR>
 " Open Vimux prompt with current buffer name
-map <Leader>vr :VimuxPromptCommand bufname("%")<CR>
-" Run last command executed by VimuxRunCommand
-map <Leader>vl :VimuxRunLastCommand<CR>
+map <Leader>vr :VimTmuxPromptCommand bufname("%")<CR>
+" Edit last command and rerun
+map <Leader>ve :VimTmuxEditCommand<CR>
+" Run last command executed
+map <Leader>vl :VimTmuxRunLastCommand<CR>
 " Inspect runner pane
-map <Leader>vi :VimuxInspectRunner<CR>
+map <Leader>vi :VimTmuxInspectRunner<CR>
+" Scroll down pane
+map <Leader>vd :VimTmuxScrollDownRunner<CR>
+" Scroll up pane
+map <Leader>vu :VimTmuxScrollUpRunner<CR>
 " Zoom the tmux runner pane
-map <Leader>vz :VimuxZoomRunner<CR>
-" close pane
-map <Leader>vq :VimuxCloseRunner<CR>
-" stop execution in pane
-map <Leader>vx :VimuxInterruptRunner<CR>
-" set new pane as runner
-map <leader>vs :VimuxSetRunner(input('set new runner: '))<CR>
-
-" create pane for vimux instead of using open ones
-let g:VimuxUseNearest=0
+map <Leader>vz :VimTmuxZoomRunner<CR>
+" Close pane
+map <Leader>vq :VimTmuxCloseRunner<CR>
+" Clear pane
+map <Leader>vc :VimTmuxClearRunner<CR>
+" Stop execution in pane
+map <Leader>vx :VimTmuxStopRunner<CR>
+" Set new pane as runner
+map <leader>vs :VimTmuxPromptRunner<CR>
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
