@@ -43,7 +43,7 @@ Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid i
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'viniciusgerevini/vimtmux' " TMUX integration
+Plug 'viniciusgerevini/tmux-runner' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Coc intellisense engine
 
@@ -252,31 +252,31 @@ noremap <Leader>gs :Gstatus<CR>
 noremap <Leader>gb :Gblame<CR>
 noremap <Leader>gl :Glog<CR>
 
-" VIMTMUX
+" tmux runner
 " Prompt and run command
-map <Leader>vp :VimTmuxPromptCommand<CR>
+map <Leader>vp :TmuxRunnerPromptCommand<CR>
 " Open Vimux prompt with current buffer name
-map <Leader>vr :VimTmuxPromptCommand bufname("%")<CR>
+map <Leader>vr :TmuxRunnerPromptCommand bufname("%")<CR>
 " Edit last command and rerun
-map <Leader>ve :VimTmuxEditCommand<CR>
+map <Leader>ve :TmuxRunnerEditCommand<CR>
 " Run last command executed
-map <Leader>vl :VimTmuxRunLastCommand<CR>
+map <Leader>vl :TmuxRunnerRunLastCommand<CR>
 " Inspect runner pane
-map <Leader>vi :VimTmuxInspectRunner<CR>
+map <Leader>vi :TmuxRunnerInspect<CR>
 " Scroll down pane
-map <Leader>vd :VimTmuxScrollDownRunner<CR>
+map <Leader>vd :TmuxRunnerScrollDown<CR>
 " Scroll up pane
-map <Leader>vu :VimTmuxScrollUpRunner<CR>
+map <Leader>vu :TmuxRunnerScrollUp<CR>
 " Zoom the tmux runner pane
-map <Leader>vz :VimTmuxZoomRunner<CR>
+map <Leader>vz :TmuxRunnerZoom<CR>
 " Close pane
-map <Leader>vq :VimTmuxCloseRunner<CR>
+map <Leader>vq :TmuxRunnerClose<CR>
 " Clear pane
-map <Leader>vc :VimTmuxClearRunner<CR>
+map <Leader>vc :TmuxRunnerClear<CR>
 " Stop execution in pane
-map <Leader>vx :VimTmuxStopRunner<CR>
+map <Leader>vx :TmuxRunnerStop<CR>
 " Set new pane as runner
-map <leader>vs :VimTmuxPromptRunner<CR>
+map <leader>vs :TmuxRunnerPromptRunner<CR>
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
