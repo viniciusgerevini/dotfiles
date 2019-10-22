@@ -47,12 +47,6 @@ Plug 'viniciusgerevini/tmux-runner' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Coc intellisense engine
 
-if v:version >= 800
-  Plug 'w0rp/ale' " Asyncronous linter
-else
-  Plug 'scrooloose/syntastic' " Syntax checking for various languages
-endif
-
 if v:version >= 704
   "" Snippets
   Plug 'SirVer/ultisnips' " lots of snippets
@@ -308,31 +302,6 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
 
-" syntastic
-let g:syntastic_always_populate_loc_list=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
-let g:syntastic_style_error_symbol = '✗'
-let g:syntastic_style_warning_symbol = '⚠'
-let g:syntastic_auto_loc_list=1
-let g:syntastic_aggregate_errors = 1
-
-" Ale
-highlight ALEErrorSign ctermfg=9
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\}
-let g:ale_linters = {
-\   'rust': ['rls', 'cargo']
-\}
-
-let g:ale_lint_on_text_changed = 'never'
-
-noremap <Leader>lf :ALEFix<CR>
-
 " use coc for jumps
 nmap <leader>gd <Plug>(coc-definition)
 nmap <leader>gr <Plug>(coc-references)
@@ -366,7 +335,6 @@ endfunction
 let g:coc_snippet_next = '<tab>'
 
 " vim-airline
-let g:airline#extensions#syntastic#enabled = 1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1

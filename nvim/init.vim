@@ -39,7 +39,6 @@ Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'viniciusgerevini/tmux-runner' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
-Plug 'w0rp/ale' " Asyncronous linter
 
 " Snippets
 Plug 'SirVer/ultisnips' " lots of snippets
@@ -238,22 +237,6 @@ let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-b>"
 let g:UltiSnipsEditSplit="vertical"
-
-" Ale
-highlight ALEErrorSign ctermfg=9
-let g:ale_sign_error = '✖'
-let g:ale_sign_warning = '⚠'
-let g:ale_fixers = {
-\   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'javascript': ['eslint'],
-\}
-let g:ale_linters = {
-\   'rust': ['rls', 'cargo']
-\}
-
-let g:ale_lint_on_text_changed = 'never'
-
-noremap <Leader>lf :ALEFix<CR>
 
 " use coc for jumps
 nmap <leader>gd <Plug>(coc-definition)
