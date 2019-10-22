@@ -304,7 +304,11 @@ let g:UltiSnipsEditSplit="vertical"
 
 " use coc for jumps
 nmap <leader>gd <Plug>(coc-definition)
+nmap <leader>gi <Plug>(coc-implementation)
 nmap <leader>gr <Plug>(coc-references)
+
+" coc lint fix
+noremap <leader>lf <Plug>(coc-fix-current)
 
 " Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
 " Coc only does snippet and additional edit on confirm.
