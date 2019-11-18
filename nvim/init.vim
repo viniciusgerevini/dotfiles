@@ -55,7 +55,6 @@ Plug 'othree/html5.vim'
 " JavaScript
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
-Plug 'mxw/vim-jsx' " JSX syntax
 
 call plug#end()
 
