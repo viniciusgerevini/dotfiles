@@ -43,7 +43,7 @@ Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid i
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
 Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
-Plug 'viniciusgerevini/tmux-runner' " TMUX integration
+Plug 'viniciusgerevini/tmux-runner.vim' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Coc intellisense engine
 
@@ -248,29 +248,29 @@ noremap <Leader>gl :Glog<CR>
 
 " tmux runner
 " Prompt and run command
-map <Leader>vp :TmuxRunnerPromptCommand<CR>
+map <Leader>tp :TmuxRunnerPromptCommand<CR>
 " Open Vimux prompt with current buffer name
-map <Leader>vr :TmuxRunnerPromptCommand bufname("%")<CR>
+map <Leader>tr :TmuxRunnerPromptCommand bufname("%")<CR>
 " Edit last command and rerun
-map <Leader>ve :TmuxRunnerEditCommand<CR>
+map <Leader>te :TmuxRunnerEditCommand<CR>
 " Run last command executed
-map <Leader>vl :TmuxRunnerRunLastCommand<CR>
+map <Leader>tl :TmuxRunnerRunLastCommand<CR>
 " Inspect runner pane
-map <Leader>vi :TmuxRunnerInspect<CR>
+map <Leader>ti :TmuxRunnerInspect<CR>
 " Scroll down pane
-map <Leader>vd :TmuxRunnerScrollDown<CR>
+map <Leader>td :TmuxRunnerScrollDown<CR>
 " Scroll up pane
-map <Leader>vu :TmuxRunnerScrollUp<CR>
+map <Leader>tu :TmuxRunnerScrollUp<CR>
 " Zoom the tmux runner pane
-map <Leader>vz :TmuxRunnerZoom<CR>
+map <Leader>tz :TmuxRunnerZoom<CR>
 " Close pane
-map <Leader>vq :TmuxRunnerClose<CR>
+map <Leader>tq :TmuxRunnerClose<CR>
 " Clear pane
-map <Leader>vc :TmuxRunnerClear<CR>
+map <Leader>tc :TmuxRunnerClear<CR>
 " Stop execution in pane
-map <Leader>vx :TmuxRunnerStop<CR>
+map <Leader>tx :TmuxRunnerStop<CR>
 " Set new pane as runner
-map <leader>vs :TmuxRunnerPromptRunner<CR>
+map <leader>ts :TmuxRunnerPromptRunner<CR>
 
 "" Set working directory
 nnoremap <leader>. :lcd %:p:h<CR>
