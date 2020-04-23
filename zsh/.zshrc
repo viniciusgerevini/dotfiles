@@ -115,6 +115,12 @@ case "$OSTYPE" in
     ;;
 esac
 
+# emulate MacOS's pbcopy and pbpaste
+if [[ $OSTYPE == linux* ]]; then
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
+fi
+
 ### USER CONFIGURATION
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
