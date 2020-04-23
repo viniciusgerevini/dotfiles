@@ -103,6 +103,18 @@ if [ ${TMUX} ]; then
   unset zle_bracketed_paste
 fi
 
+### OS SPECIFIC CONFIG
+
+# ls with colored directories
+case "$OSTYPE" in
+  darwin*)
+    alias ls='ls -G'
+    ;;
+  linux*)
+    alias ls='ls --color="auto"'
+    ;;
+esac
+
 ### USER CONFIGURATION
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
