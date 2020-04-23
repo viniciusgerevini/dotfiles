@@ -1,7 +1,7 @@
 [user]
   name = Vinicius Gerevini
   email = viniciusgerevini@gmail.com
-  signingkey = 0536B9DD8AFA5562
+  signingkey = 643020C1C0B8AE28
 
 [merge]
   tool = vimdiff
