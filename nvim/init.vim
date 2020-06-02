@@ -343,12 +343,5 @@ vnoremap K :m '<-2<CR>gv=gv
 " javascript
 let g:javascript_enable_domhtmlcss = 1
 
-" show leading spaces
-hi Conceal guibg=NONE ctermbg=NONE ctermfg=DarkGrey
-autocmd BufWinEnter * setl conceallevel=2 concealcursor=nv
-autocmd BufWinEnter * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
-autocmd BufReadPre * setl conceallevel=2 concealcursor=nv
-autocmd BufReadPre * syn match LeadingSpace /\(^ *\)\@<= / containedin=ALL conceal cchar=·
-
 " show tabs and trailling spaces
-set list listchars=tab:→\ ,trail:·
+set list listchars=tab:→\ ,trail:·,space:·
