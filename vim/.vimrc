@@ -41,7 +41,7 @@ Plug 'sheerun/vim-polyglot' " Language packs
 Plug 'sickill/vim-pasta' " Pasting with indentation context
 Plug 'ConradIrwin/vim-bracketed-paste' " set paste mode automatically to avoid indentation issues
 Plug 'tpope/vim-surround' " delete, change and insert surroundings
-Plug 'terryma/vim-multiple-cursors' " edit multiple selections at same time
+Plug 'mg979/vim-visual-multi' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'viniciusgerevini/tmux-runner.vim' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
