@@ -24,11 +24,9 @@ Plug 'tomtom/tcomment_vim' " comment/uncomment command with support to embbeded 
 Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'tommcdo/vim-fugitive-blame-ext' " add commit message to blame on vim-fugitive
-Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, ... finder for Vim
 Plug 'vim-airline/vim-airline' " Lean & mean status/tabline
 Plug 'vim-airline/vim-airline-themes' " Airline themes
 Plug 'airblade/vim-gitgutter' " Git status indicator
-Plug 'vim-scripts/grep.vim' " Grep command integration
 Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
 Plug 'sheerun/vim-polyglot' " Language packs
@@ -39,6 +37,9 @@ Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'viniciusgerevini/tmux-runner.vim' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
 
 " Snippets
 Plug 'SirVer/ultisnips' " lots of snippets
@@ -182,11 +183,6 @@ augroup END
 " visual mode search
 vnoremap // y/<C-R>"<CR>"
 
-" Git
-noremap <Leader>gs :Gstatus<CR>
-noremap <Leader>gb :Gblame<CR>
-noremap <Leader>gl :Glog<CR>
-
 " tmux-runner
 " Prompt and run command
 map <Leader>tp :TmuxRunnerPromptCommand<CR>
@@ -213,26 +209,40 @@ map <Leader>tx :TmuxRunnerStop<CR>
 " Set new pane as runner
 map <leader>ts :TmuxRunnerPromptRunner<CR>
 
-" ctrlp.vim
-set wildmode=list:longest,list:full
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,__pycache__
-let g:ctrlp_custom_ignore = '\v[\/](node_modules|target|dist)|(\.(swp|tox|ico|git|hg|svn))$'
-let g:ctrlp_user_command = "find %s -type f | grep -Ev '"+ g:ctrlp_custom_ignore +"'"
-let g:ctrlp_use_caching = 1
+" Telescope configuration
+nnoremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>s <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
 
-" The Silver Searcher
-if executable('ag')
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-  let g:ctrlp_use_caching = 0
-endif
+" Git
+nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
+nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
+nnoremap <leader>gcb <cmd>lua require('telescope.builtin').git_bcommits()<cr>
 
-cnoremap <C-P> <C-R>=expand("%:p:h") . "/" <CR>
-noremap <leader>b :CtrlPBuffer<CR>
-noremap <C-P> :CtrlP<CR>
-let g:ctrlp_map = '<leader>e'
-let g:ctrlp_open_new_file = 'r'
-let g:ctrlp_cache_dir = $HOME . '/.cache/ctrlp'
+lua << EOF
+local actions = require('telescope.actions')
+require('telescope').setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close,
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  },
+  pickers = {
+     buffers = {
+       sort_lastused = true,
+       theme = "dropdown",
+       previewer = false,
+     }
+   }
+}
+EOF
+
 
 "" snippets
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -315,12 +325,6 @@ let g:NERDTreeWinSize = 50
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*/coverage
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
-
-" grep.vim
-nnoremap <silent> <leader>f :Rgrep<CR>
-let Grep_Default_Options = '-IR'
-let Grep_Skip_Files = '*.log *.db'
-let Grep_Skip_Dirs = '.git node_modules'
 
 noremap YY "+y<CR>
 
