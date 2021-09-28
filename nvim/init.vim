@@ -56,6 +56,9 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript' " JavaScript Syntax
 Plug 'othree/javascript-libraries-syntax.vim' " Syntax for some JS libraries
 
+Plug 'calviken/vim-gdscript3' " Godot's GDScript syntax highlight
+Plug 'viniciusgerevini/clyde.vim' " Clyde Dialogue syntax highlighting
+
 call plug#end()
 
 " Required:
