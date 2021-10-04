@@ -211,15 +211,18 @@ map <leader>ts :TmuxRunnerPromptRunner<CR>
 
 " Telescope configuration
 nnoremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
-nnoremap <leader>f <cmd>lua require('telescope.builtin').live_grep()<cr>
-nnoremap <leader>s <cmd>lua require('telescope.builtin').grep_string()<cr>
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fa <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
+nnoremap <leader>p <cmd>lua require('telescope.builtin').registers()<cr>
 
 " Git
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
 nnoremap <leader>gc <cmd>lua require('telescope.builtin').git_commits()<cr>
-nnoremap <leader>gcb <cmd>lua require('telescope.builtin').git_bcommits()<cr>
+nnoremap <leader>gbc <cmd>lua require('telescope.builtin').git_bcommits()<cr>
 
 lua << EOF
 local actions = require('telescope.actions')
