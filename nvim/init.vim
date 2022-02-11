@@ -36,14 +36,18 @@ Plug 'mg979/vim-visual-multi' " edit multiple selections at same time
 Plug 'tyru/open-browser.vim' " Open URLs in the browser
 Plug 'viniciusgerevini/tmux-runner.vim' " TMUX integration
 Plug 'ryanoasis/vim-devicons' " Filetype icons support (requires patched font)
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+
+Plug 'neovim/nvim-lspconfig' " LSP helper configs
+" LSP autocompletion integration
+Plug 'hrsh7th/nvim-cmp' " autocompletion engine
+Plug 'hrsh7th/cmp-nvim-lsp' " comp/lsp integration
+Plug 'hrsh7th/cmp-buffer' " completion buffer words source
+Plug 'hrsh7th/cmp-path' " completion path source
+Plug 'L3MON4D3/LuaSnip' " snipet manager
+Plug 'saadparwaiz1/cmp_luasnip' " snipet manager
 
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
-
-" Snippets
-Plug 'SirVer/ultisnips' " lots of snippets
-Plug 'honza/vim-snippets' " some more snippets
 
 " Color
 Plug 'chriskempson/base16-vim' " Base16 colorscheme
@@ -133,12 +137,6 @@ set laststatus=2
 " Use modeline overrides
 set modeline
 set modelines=10
-
-"set statusline=%F%m%r%h%w%=(%{&ff}/%Y)\ (line\ %l\/%L,\ col\ %c)\
-
-"if exists("*fugitive#statusline")
-"  set statusline+=%{fugitive#statusline()}
-"endif
 
 " remove line number background
 highlight LineNr ctermbg=NONE
@@ -247,58 +245,93 @@ require('telescope').setup{
 EOF
 
 
-"" snippets
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-b>"
-let g:UltiSnipsEditSplit="vertical"
+""*****************************************************************************
+""" LSP config
+""*****************************************************************************
+lua << EOF
+local opts = { noremap=true, silent=true }
 
-" use coc for jumps
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gi <Plug>(coc-implementation)
-nmap <leader>gr <Plug>(coc-references)
+-- completion capability
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
-" coc lint fix
-noremap <leader>lf <Plug>(coc-fix-current)
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
+  -- Mappings. See `:help vim.lsp.*` for documentation on any of the below functions
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
+  -- go to declaration
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+  -- go to definition
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>Telescope lsp_definitions<CR>', opts)
+  -- show hover info
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  -- go to implementation
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>Telescope lsp_implementations<CR>', opts)
+  -- go to type definition
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>D', '<cmd>Telescope lsp_type_definitions<CR>', opts)
+  -- show references
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>Telescope lsp_references<CR>', opts)
+  -- method signature help
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  -- workspace related
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+  -- rename symbol
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  -- show code actions
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  -- format code
+  vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>ft', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
-" Use <cr> for confirm completion, `<C-g>u` means break undo chain at current position.
-" Coc only does snippet and additional edit on confirm.
-inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  -- diagnostics
+  vim.api.nvim_set_keymap('n', '<leader>de', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>dp', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>df', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>dl', '<cmd>Telescope diagnostics<CR>', opts)
+end
 
-" use <c-space> for trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+require'lspconfig'.tsserver.setup{
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
-" rename current word
-nmap <leader>rn <Plug>(coc-rename)
+require'lspconfig'.gdscript.setup{
+  on_attach = on_attach,
+  capabilities = capabilities
+}
 
-" use <c-j> and <c-k> for selection options
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<C-j>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<C-k>"
 
-"use <tab> for trigger completion, completion confirm, snippet expand and jump
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? coc#rpc#request('doKeymap', ['snippets-expand-jump','']) :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+ -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+  cmp.setup({
+    snippet = {
+      expand = function(args)
+        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+      ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'luasnip' }, -- For luasnip users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
-let g:coc_snippet_next = '<tab>'
+EOF
 
 " vim-airline
 let g:airline#extensions#branch#enabled = 1
@@ -341,10 +374,6 @@ nnoremap <silent> <leader><space> :noh<cr>
 " Vmap for maintain Visual Mode after shifting > and <
 vmap < <gv
 vmap > >gv
-
-" Move visual block
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
 
 ""*****************************************************************************
 """ Language configs
