@@ -24,8 +24,7 @@ Plug 'tomtom/tcomment_vim' " comment/uncomment command with support to embbeded 
 Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'tommcdo/vim-fugitive-blame-ext' " add commit message to blame on vim-fugitive
-Plug 'vim-airline/vim-airline' " Lean & mean status/tabline
-Plug 'vim-airline/vim-airline-themes' " Airline themes
+Plug 'nvim-lualine/lualine.nvim' " status line
 Plug 'airblade/vim-gitgutter' " Git status indicator
 Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
@@ -47,7 +46,7 @@ Plug 'L3MON4D3/LuaSnip' " snipet manager
 Plug 'saadparwaiz1/cmp_luasnip' " snipet manager
 
 Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-telescope/telescope.nvim' " fuzzy finder
 
 " Color
 Plug 'chriskempson/base16-vim' " Base16 colorscheme
@@ -333,21 +332,10 @@ require'lspconfig'.gdscript.setup{
 
 EOF
 
-" vim-airline
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_skip_empty_sections = 1
-
-if !exists('g:airline_symbols')
- let g:airline_symbols = {}
-endif
-
-let g:airline#extensions#tabline#left_sep = ' '
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline_left_sep          = '▶'
-let g:airline_right_sep         = '◀'
-let g:airline#extensions#readonly#symbol   = '⊘'
-let g:airline_symbols.branch    = '⎇'
+" lualine config
+lua << EOF
+require('lualine').setup()
+EOF
 
 """ NERDTree configuration
 let g:NERDTreeMinimalUI = 1
