@@ -20,7 +20,7 @@ call plug#begin(expand('~/.config/nvim/plugged'))
 Plug 'scrooloose/nerdtree' " File tree
 Plug 'Xuyuanp/nerdtree-git-plugin' "  Nerdtree Git file status
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' " enable colors for filetype
-Plug 'tomtom/tcomment_vim' " comment/uncomment command with support to embbeded types
+Plug 'numToStr/Comment.nvim' " comment/uncomment commands
 Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'tommcdo/vim-fugitive-blame-ext' " add commit message to blame on vim-fugitive
@@ -377,6 +377,12 @@ EOF
 lua << EOF
 require('lualine').setup()
 EOF
+
+" comments config
+lua << EOF
+require('Comment').setup()
+EOF
+
 
 """ NERDTree configuration
 let g:NERDTreeMinimalUI = 1
