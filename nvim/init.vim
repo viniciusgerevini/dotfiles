@@ -237,7 +237,8 @@ require('telescope').setup{
   },
   pickers = {
      buffers = {
-       sort_lastused = true,
+       sort_mru = true,
+       ignore_current_buffer = true,
        theme = "dropdown",
        previewer = false,
      }
