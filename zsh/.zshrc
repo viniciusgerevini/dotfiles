@@ -153,3 +153,6 @@ function load_file_if_exists() {
 
 load_file_if_exists ~/.private/scripts.sh
 load_file_if_exists ~/.nvm/nvm.sh
+
+# load manually installed zsh if available
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
