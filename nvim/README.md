@@ -4,7 +4,9 @@
 
 - curl (only required for installing vim-plug. If you install it manually, you don't need curl)
 - [ripgrep](https://github.com/BurntSushi/ripgrep) (used by Telescope)
-- [Nerdfont](https://www.nerdfonts.com) patched font (for icons).
+- [Nerdfont](https://www.nerdfonts.com) patched font (for icons)
+- [tree-sitter](https://github.com/tree-sitter/tree-sitter)
+- [vscode-js-debug](https://github.com/microsoft/vscode-js-debug) for JavaScript debugging
 
 ## Notes
 

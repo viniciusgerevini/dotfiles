@@ -46,6 +46,13 @@ Plug 'L3MON4D3/LuaSnip' " snipet manager
 Plug 'saadparwaiz1/cmp_luasnip' " snipet manager
 Plug 'rafamadriz/friendly-snippets' " snippets collection
 
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " treesitter parser integration
+
+Plug 'mfussenegger/nvim-dap' " debug adapter protocol client
+Plug 'rcarriga/nvim-dap-ui' " UI config for dap
+Plug 'mxsdev/nvim-dap-vscode-js' " JS dap adapter
+Plug 'theHamsta/nvim-dap-virtual-text' " shows variables def and values as virtual text
+
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim' " fuzzy finder
 
@@ -174,9 +181,6 @@ augroup END
 "" Remove spaces on save
 "autocmd BufEnter * EnableStripWhitespaceOnSave
 
-"*****************************************************************************
-"" Mappings
-"*****************************************************************************
 "" Search
 " visual mode search
 vnoremap // y/<C-R>"<CR>"
@@ -206,6 +210,16 @@ map <Leader>tc :TmuxRunnerClear<CR>
 map <Leader>tx :TmuxRunnerStop<CR>
 " Set new pane as runner
 map <leader>ts :TmuxRunnerPromptRunner<CR>
+
+
+" treesitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  -- Automatically install missing parsers when entering buffer
+  auto_install = true,
+}
+EOF
+
 
 " Telescope configuration
 nnoremap <leader>e <cmd>lua require('telescope.builtin').find_files()<cr>
@@ -373,6 +387,48 @@ vim.api.nvim_set_keymap("s", "<c-k>", "<cmd>lua snip_go_back()<cr>", {silent = t
 vim.api.nvim_set_keymap("i", "<c-l>", "<cmd>lua snip_select_option()<cr>", {silent = true})
 
 EOF
+
+""*****************************************************************************
+""" DAP config
+""*****************************************************************************
+lua << EOF
+require("dap-vscode-js").setup({
+  debugger_path = os.getenv('HOME') .. "/code/tools/vscode-js-debug",
+  adapters = { 'pwa-node', 'node-terminal', 'pwa-extensionHost' },
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  require("dap").configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    }
+  }
+end
+
+require("dapui").setup()
+require("nvim-dap-virtual-text").setup()
+EOF
+nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
+nnoremap <silent> <F6> <Cmd>lua require'dap'.step_over()<CR>
+nnoremap <silent> <F7> <Cmd>lua require'dap'.step_into()<CR>
+nnoremap <silent> <F8> <Cmd>lua require'dap'.step_out()<CR>
+nnoremap <silent> <Leader>db <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <Leader>dc <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
+nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+nnoremap <silent> <Leader>du <Cmd>lua require'dapui'.toggle()<CR>
 
 " lualine config
 lua << EOF
