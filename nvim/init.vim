@@ -25,6 +25,7 @@ Plug 'tpope/vim-fugitive' " Git integration
 Plug 'tommcdo/vim-fubitive' " add Bitbucket support to vim-fugitive
 Plug 'tommcdo/vim-fugitive-blame-ext' " add commit message to blame on vim-fugitive
 Plug 'nvim-lualine/lualine.nvim' " status line
+Plug 'akinsho/bufferline.nvim', { 'tag': 'v2.*' } " buffer line
 Plug 'airblade/vim-gitgutter' " Git status indicator
 Plug 'Raimondi/delimitMate' " Autocomplete for quotes, brackets, etc
 Plug 'editorconfig/editorconfig-vim' " Editorconfig integration
@@ -57,7 +58,10 @@ Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim' " fuzzy finder
 
 " Color
-Plug 'chriskempson/base16-vim' " Base16 colorscheme
+" Plug 'chriskempson/base16-vim' " Base16 colorscheme
+Plug 'EdenEast/nightfox.nvim' " colorscheme
+Plug 'mhartington/oceanic-next' " colorscheme
+Plug 'rakr/vim-one' " colorscheme
 
 " html / css
 Plug 'hail2u/vim-css3-syntax'
@@ -130,10 +134,24 @@ set relativenumber
 "" Enable hidden buffers
 set hidden
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
-endif
+" if filereadable(expand("~/.vimrc_background"))
+"   let base16colorspace=256
+"   source ~/.vimrc_background
+" endif
+
+"" Colorschemes
+set termguicolors
+
+colorscheme nordfox
+
+"" OCEANIC NEXT
+" let g:oceanic_next_terminal_bold = 1
+" let g:oceanic_next_terminal_italic = 1
+" colorscheme OceanicNext
+
+"" VIM ONE
+" colorscheme one
+" set background=light
 
 " Scroll offset
 set scrolloff=10
@@ -144,9 +162,6 @@ set laststatus=2
 " Use modeline overrides
 set modeline
 set modelines=10
-
-" remove line number background
-highlight LineNr ctermbg=NONE
 
 "*****************************************************************************
 "" Abbreviations
@@ -433,6 +448,14 @@ nnoremap <silent> <Leader>du <Cmd>lua require'dapui'.toggle()<CR>
 " lualine config
 lua << EOF
 require('lualine').setup()
+EOF
+
+lua << EOF
+require("bufferline").setup {
+  options = {
+    diagnostics = "nvim_lsp",
+  },
+}
 EOF
 
 " comments config
