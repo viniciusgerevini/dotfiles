@@ -245,7 +245,7 @@ nnoremap <leader>fs <cmd>lua require('telescope.builtin').grep_string()<cr>
 nnoremap <leader>fr <cmd>lua require('telescope.builtin').resume()<cr>
 nnoremap <leader>b <cmd>lua require('telescope.builtin').buffers()<cr>
 nnoremap <leader>m <cmd>lua require('telescope.builtin').marks()<cr>
-nnoremap <leader>p <cmd>lua require('telescope.builtin').registers()<cr>
+nnoremap <leader>P <cmd>lua require('telescope.builtin').registers()<cr>
 
 " Git
 nnoremap <leader>gs <cmd>lua require('telescope.builtin').git_status()<cr>
@@ -438,12 +438,12 @@ nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
 nnoremap <silent> <F6> <Cmd>lua require'dap'.step_over()<CR>
 nnoremap <silent> <F7> <Cmd>lua require'dap'.step_into()<CR>
 nnoremap <silent> <F8> <Cmd>lua require'dap'.step_out()<CR>
-nnoremap <silent> <Leader>db <Cmd>lua require'dap'.toggle_breakpoint()<CR>
-nnoremap <silent> <Leader>dc <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
-nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
-nnoremap <silent> <Leader>dr <Cmd>lua require'dap'.repl.open()<CR>
-nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
-nnoremap <silent> <Leader>du <Cmd>lua require'dapui'.toggle()<CR>
+nnoremap <silent> <Leader>dbb <Cmd>lua require'dap'.toggle_breakpoint()<CR>
+nnoremap <silent> <Leader>dbc <Cmd>lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>
+nnoremap <silent> <Leader>dbl <Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>
+nnoremap <silent> <Leader>dbr <Cmd>lua require'dap'.repl.open()<CR>
+" nnoremap <silent> <Leader>dl <Cmd>lua require'dap'.run_last()<CR>
+nnoremap <silent> <Leader>dbu <Cmd>lua require'dapui'.toggle()<CR>
 
 " lualine config
 lua << EOF
@@ -477,7 +477,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.db,*.sqlite,*/coverage
 nnoremap <silent> <F2> :NERDTreeFind<CR>
 noremap <F3> :NERDTreeToggle<CR>
 
+"" Copy to OS register
 noremap YY "+y<CR>
+
+"" paste last copied data (ignores deletes)
+nnoremap <leader>p "0p<CR>
 
 " Buffer nav
 nnoremap <Tab> :bnext<CR>
