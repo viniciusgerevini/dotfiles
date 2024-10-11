@@ -48,5 +48,9 @@ return { -- Useful plugin to show you pending keybinds.
         { '<leader>g', group = 'Git' },
         { '<leader>h', group = 'Git Hunk', mode = { 'n', 'v' } },
       },
+      triggers = {
+        { "`", mode = { "n", "v" } },
+        { "\"", mode = { "n", "v" } },
+      }
     },
   }

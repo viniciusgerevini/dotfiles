@@ -16,7 +16,6 @@ return {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
-      -- Automatically install LSPs and related tools to stdpath for Neovim
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -82,7 +81,7 @@ return {
           -- diagnostics
           map('<leader>de', vim.diagnostic.open_float, 'Diagnostic Float Details')
           map('<leader>dp', vim.diagnostic.goto_prev, 'Diagnostic Previous')
-          map('<leader>df', vim.diagnostic.goto_next, 'Diagnostic Next')
+          map('<leader>dn', vim.diagnostic.goto_next, 'Diagnostic Next')
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them

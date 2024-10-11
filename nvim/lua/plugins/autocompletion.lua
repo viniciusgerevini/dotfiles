@@ -2,6 +2,7 @@ return { -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
+    'onsails/lspkind.nvim', -- icons for the autocompletion hover
     -- Snippet Engine & its associated nvim-cmp source
     {
       'L3MON4D3/LuaSnip',
@@ -35,6 +36,7 @@ return { -- Autocompletion
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
+    local lspkind = require 'lspkind'
     luasnip.config.setup {}
 
     cmp.setup {
@@ -44,6 +46,15 @@ return { -- Autocompletion
         end,
       },
       completion = { completeopt = 'menu,menuone,noinsert' },
+
+      formatting = {
+        format = lspkind.cmp_format({
+          mode = 'symbol_text', -- show only symbol annotations
+          maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+          ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+          show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+        })
+      },
 
       mapping = cmp.mapping.preset.insert {
         -- Select the [n]ext item

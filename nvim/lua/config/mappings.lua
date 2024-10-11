@@ -19,3 +19,4 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
+vim.keymap.set({ 'n', 'v' }, 'YY', "\"+y<CR>")
