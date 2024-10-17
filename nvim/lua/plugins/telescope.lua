@@ -80,7 +80,7 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = 'Find Resume' })
     -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
     -- vim.keymap.set('n', '<leader>m', builtin.marks, { desc = 'List Marks' })
-    -- vim.keymap.set('n', '<leader>p', builtin.registers, { desc = 'Show Registers' })
+    -- vim.keymap.set('n', '<leader>P', builtin.registers, { desc = 'Show Registers' })
 
     -- diagnostics
     vim.keymap.set('n', '<leader>dl', builtin.diagnostics, { desc = 'Diagnostics List' })

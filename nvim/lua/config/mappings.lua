@@ -19,4 +19,7 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('v', '<', '<gv')
 vim.keymap.set('v', '>', '>gv')
 
+-- paste to global register
 vim.keymap.set({ 'n', 'v' }, 'YY', "\"+y<CR>")
+-- paste from copy only register (ignores deletes)
+vim.keymap.set({ 'n', 'v' }, '<leader>p', "\"0p<CR>")
