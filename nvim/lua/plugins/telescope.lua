@@ -17,12 +17,16 @@ return { -- Fuzzy Finder (files, lsp, etc)
         return vim.fn.executable 'make' == 1
       end,
     },
-    { 'nvim-telescope/telescope-ui-select.nvim' },
+    { 'nvim-telescope/telescope-ui-select.nvim' }, --sets default vim ui-select to telescope
+    { "nvim-telescope/telescope-live-grep-args.nvim"}, -- allow passing extra args to live_grep
 
     -- Useful for getting pretty icons, but requires a Nerd Font.
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
+    local actions = require('telescope.actions')
+    local lga_actions = require("telescope-live-grep-args.actions")
+
     require('telescope').setup {
       defaults = {
         mappings = {
@@ -30,8 +34,13 @@ return { -- Fuzzy Finder (files, lsp, etc)
             -- ["<esc>"] = actions.close,
             ["<C-j>"] = "move_selection_next",
             ["<C-k>"] = "move_selection_previous",
+            ["<C-q>"] = function(bufnr)
+              actions.smart_send_to_qflist(bufnr)
+              require("telescope.builtin").quickfix()
+            end,
           },
         },
+        path_display = { "truncate" },
       },
       pickers = {
          buffers = {
@@ -39,6 +48,14 @@ return { -- Fuzzy Finder (files, lsp, etc)
            ignore_current_buffer = true,
            theme = "dropdown",
            previewer = false,
+          mappings = {
+            i = {
+              ["<c-d>"] = "delete_buffer",
+            },
+            n = {
+              ["d"] = "delete_buffer",
+            }
+          }
          }
        },
 
@@ -46,12 +63,23 @@ return { -- Fuzzy Finder (files, lsp, etc)
         ['ui-select'] = {
           require('telescope.themes').get_dropdown(),
         },
+        live_grep_args = {
+          mappings = { -- extend mappings
+            i = {
+              -- wrap current text in quotes and append --iglob for path param
+              ["<C-i>"] = lga_actions.quote_prompt({ postfix = " --iglob " }),
+              -- freeze the current list and start a fuzzy search in the frozen list
+              ["<C-space>"] = actions.to_fuzzy_refine,
+            },
+          },
+        }
       },
     }
 
     -- Enable Telescope extensions if they are installed
     pcall(require('telescope').load_extension, 'fzf')
     pcall(require('telescope').load_extension, 'ui-select')
+    pcall(require('telescope').load_extension, 'live_grep_args')
 
     -- See `:help telescope.builtin`
     local builtin = require 'telescope.builtin'
@@ -70,7 +98,9 @@ return { -- Fuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = 'Find existing buffers' })
 
     -- search
-    vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find Grep' })
+    -- vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = 'Find Grep' })
+    vim.keymap.set('n', '<leader>fg', require('telescope').extensions.live_grep_args.live_grep_args, { desc = 'Find Grep' })
+
     vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = 'Find current Word' })
 
     vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = 'Find Help' })
