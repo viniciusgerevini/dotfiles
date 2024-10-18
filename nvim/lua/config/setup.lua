@@ -43,11 +43,11 @@ vim.opt.listchars = { tab = '→ ', trail = '·', space = '·', nbsp = '␣' }
 vim.opt.inccommand = 'split'
 
 -- Show which line your cursor is on
-vim.opt.cursorline = true
+-- vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 -- used in some plugins to enable icons
-vim.g.have_nerd_font = false
+vim.g.have_nerd_font = true
