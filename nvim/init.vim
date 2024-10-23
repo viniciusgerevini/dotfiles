@@ -139,9 +139,6 @@ set hidden
 "   source ~/.vimrc_background
 " endif
 
-"" Colorschemes
-set termguicolors
-
 colorscheme nordfox
 
 "" OCEANIC NEXT
