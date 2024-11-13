@@ -23,3 +23,6 @@ vim.keymap.set('v', '>', '>gv')
 vim.keymap.set({ 'n', 'v' }, 'YY', "\"+y<CR>")
 -- paste from copy only register (ignores deletes)
 vim.keymap.set({ 'n', 'v' }, '<leader>p', "\"0p<CR>")
+
+-- shortcut to go to previous buffer
+vim.keymap.set({ 'n', 'v' }, '<leader><space>', "<C-6>")
